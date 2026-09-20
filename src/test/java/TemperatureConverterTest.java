@@ -30,9 +30,11 @@ class TemperatureConverterTest {
 
     @Test
     void testKelvinToCelsius() {
+
         TemperatureConverter converter = new TemperatureConverter();
 
         double result = converter.kelvinToCelsius(300);
+
         assertEquals(26.85, result, 0.01);
     }
 }
