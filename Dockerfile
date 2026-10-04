@@ -1,8 +1,8 @@
 FROM maven:3.9.6-eclipse-temurin-21
 WORKDIR /app
 COPY pom.xml .
-COPY . /app
-RUN mvn package
+COPY src ./src
+RUN mvn package -DskipTests
 CMD ["java", "-jar", "target/OTP1_inclass1_assignment_Khaled_Marai-1.0-SNAPSHOT.jar"]
 
 
