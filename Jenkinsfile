@@ -12,8 +12,8 @@ pipeline {
         DOCKER_IMAGE_TAG = 'latest'
 
         DB_URL = 'jdbc:mariadb://localhost:3306/temperature_converter'
-        DB_USER = 'temperature_user'
-        DB_PASSWORD = 'temperature_password'
+        DB_USER = 'maraim'
+        DB_PASSWORD = '1234'
     }
 
     stages {
