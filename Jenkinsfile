@@ -11,9 +11,6 @@ pipeline {
         DOCKERHUB_REPO = 'khaledmarai/khaled_marai_temperature_v1_pipeline'
         DOCKER_IMAGE_TAG = 'latest'
 
-        DB_URL = 'jdbc:mariadb://localhost:3306/temperature_converter'
-        DB_USER = 'maraim'
-        DB_PASSWORD = '1234'
     }
 
     stages {
