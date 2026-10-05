@@ -24,6 +24,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /app/target/OTP1_inclass1_assignment_Khaled_Marai-1.0-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/OTP1_inclass1_assignment_Khaled_Marai.jar app.jar
 
 CMD ["java", "-Dprism.order=sw", "-jar", "app.jar"]
