@@ -256,7 +256,7 @@ khlaledmarai/temperature_converter:latest
 
 Option 2: Build and Run Locally
 
-Make sure Docker Desktop is running, then open a terminal in the project root directory.
+Make sure Docker Desktop is running, then open a terminal in the project root directory. 
 
 1. Build the Docker image
 ```bash
@@ -336,9 +336,10 @@ Further development can improve input validation, automated testing, conversion 
 
 
 
-Contact Information:
+### Contact Information:
 Khaled Marai.
+```
 maraim@metropolia.fi
-
+```
 
 
