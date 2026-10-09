@@ -233,18 +233,72 @@ If the project contains the appropriate Maven JavaFX plugin configuration, run:
 mvn javafx:run
 ```
 
+
 ### Run with Docker
 
-Build the Docker image from the project root:
+You can run the Temperature Converter application using a prebuilt Docker image from Docker Hub or build the image locally.
 
+Option 1: Run the Image from Docker Hub
+
+Pull the latest image:
+```bash
+docker pull khlaledmarai/temperature_converter:latest
+```
+
+Since this application uses JavaFX for its graphical user interface (GUI), Windows users must configure an X server before running the container.
+
+Run the application on Windows with an X server available:
+```bash
+docker run --rm \
+-e DISPLAY=host.docker.internal:0.0 \
+khlaledmarai/temperature_converter:latest
+```
+
+Option 2: Build and Run Locally
+
+Make sure Docker Desktop is running, then open a terminal in the project root directory.
+
+1. Build the Docker image
 ```bash
 docker build -t temperature-converter .
 ```
 
-Run the image:
+2. Run the container
+
 ```bash
 docker run --rm temperature-converter
 ```
+Note: If the application requires a graphical display, configure the appropriate display settings for your operating system before running the container.
+
+Configure the GUI on Windows
+
+To display the JavaFX application when running Docker on Windows, you need an X server, such as VcXsrv or Xming.
+
+Follow these steps:
+
+Install and start VcXsrv or Xming on Windows.
+
+Configure the X server to accept connections from the Docker container.
+
+Make sure the display number matches the DISPLAY environment variable.
+
+Run the Docker container using the command provided in Option 1.
+
+The environment variable DISPLAY=host.docker.internal:0.0 tells the application to connect to the X server on the Windows host. This hostname is supported by Docker Desktop in typical Windows configurations.
+
+If the GUI does not appear, check the following:
+
+The X server is running.
+
+The display number is correct.
+
+The Windows firewall is not blocking the connection.
+
+The X server's access controls permit the required connection.
+
+The container includes the necessary Java, JavaFX, and X11 libraries.
+
+For security, avoid allowing unrestricted X server connections except when necessary for testing
 
 
 ### Using the Application
@@ -278,4 +332,13 @@ Temperature Converter demonstrates Java programming, JavaFX interface developmen
 The application is designed to convert temperatures between Celsius, Fahrenheit, and Kelvin, identify extreme temperatures, and save conversion records in a relational database.
 
 Further development can improve input validation, automated testing, conversion history, and deployment automation.
+
+
+
+
+Contact Information:
+Khaled Marai.
+maraim@metropolia.fi
+
+
 
