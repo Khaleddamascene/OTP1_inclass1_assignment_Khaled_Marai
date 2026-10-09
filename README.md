@@ -268,7 +268,11 @@ docker build -t temperature-converter .
 ```bash
 docker run --rm temperature-converter
 ```
-Note: If the application requires a graphical display, configure the appropriate display settings for your operating system before running the container.
+
+
+Note: 
+
+If the application requires a graphical display, configure the appropriate display settings for your operating system before running the container.
 
 Configure the GUI on Windows
 
@@ -298,7 +302,6 @@ The X server's access controls permit the required connection.
 
 The container includes the necessary Java, JavaFX, and X11 libraries.
 
-For security, avoid allowing unrestricted X server connections except when necessary for testing
 
 
 ### Using the Application
