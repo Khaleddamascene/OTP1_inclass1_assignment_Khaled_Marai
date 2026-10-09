@@ -95,40 +95,6 @@ The relational database contains two tables.
 
 The `temperature_units` table stores Celsius, Fahrenheit, and Kelvin. The `temperature_records` table references this table twice: once for the source unit and once for the destination unit.
 
-### Temperature Conversion Logic
-
-The application converts the source temperature to Celsius and then converts Celsius to the requested target unit.
-
-The formulas are:
-
-**Fahrenheit to Celsius**
-
-```text
-C = (F - 32) × 5 / 9
-```
-
-**Celsius to Fahrenheit**
-
-```text
-F = (C × 9 / 5) + 32
-```
-
-**Kelvin to Celsius**
-
-```text
-C = K - 273.15
-```
-
-**Celsius to Kelvin**
-
-```text
-K = C + 273.15
-```
-
-If the source and target units are identical, the original temperature value is returned.
-
-The `isExtremeTemperature()` method considers a temperature extreme when it is below -40°C or above 50°C.
-
 ### Database Access
 
 `TemperatureUnitDAO` provides functionality to retrieve all supported temperature units and find a unit by its ID.
@@ -151,69 +117,6 @@ Development is organized around separate application components:
 6. Connect the interface to the conversion and database layers.
 7. Perform manual tests for conversion accuracy, database functionality, and error handling.
 
-## 4. Functional Testing
-
-Testing should cover the conversion logic, user interface, database operations, and error handling.
-
-The test cases below describe the expected behavior. They should only be marked as passed after the application has been executed and the results verified.
-
-### TemperatureConverter Testing
-
-| Test case | Input | Expected result |
-|---|---|---|
-| Celsius to Fahrenheit | 0°C | 32.00°F |
-| Celsius to Kelvin | 0°C | 273.15 K |
-| Fahrenheit to Celsius | 32°F | 0.00°C |
-| Kelvin to Celsius | 273.15 K | 0.00°C |
-| Same-unit conversion | 25°C to Celsius | 25.00°C |
-| Negative temperature | -40°C to Fahrenheit | -40.00°F |
-| Extreme temperature | 60°C | Extreme |
-| Non-extreme temperature | 20°C | Not extreme |
-| Invalid numeric input | `abc` | An appropriate error message |
-
-### Database DAO Testing
-
-| Test case | Expected result |
-|---|---|
-| Database initialization | Required tables are created |
-| Retrieve all temperature units | Three default units are returned |
-| Find unit by ID | The matching unit is returned |
-| Find unknown unit | The appropriate error or missing-unit result is handled |
-| Save conversion record | The record is inserted successfully |
-| Retrieve conversion records | Saved records are returned in descending ID order |
-| Foreign key constraints | References to nonexistent units are rejected |
-| Database connection failure | An appropriate database error is reported |
-
-### Manual Testing Procedure
-
-1. Start the MariaDB server.
-2. Execute the SQL initialization script.
-3. Configure the database credentials.
-4. Launch the JavaFX application.
-5. Verify that the source and destination dropdown menus contain the supported units.
-6. Enter a temperature and select the source and target units.
-7. Click **Convert** and compare the result with the expected value.
-8. Click **Save Record** and verify that the conversion is stored.
-9. Click **Check Extreme Temperature** and verify the classification.
-10. Click **Test Database** and confirm that the database connection works.
-11. Enter invalid text and verify that an error message appears.
-12. Test the application with the database unavailable and verify that errors are handled appropriately.
-
-### Test Results
-
-The following table should be updated after testing.
-
-| Test category | Result |
-|---|---|
-| Temperature conversion | Not tested |
-| Invalid input handling | Not tested |
-| Extreme-temperature detection | Not tested |
-| Database initialization | Not tested |
-| Temperature unit retrieval | Not tested |
-| Saving conversion records | Not tested |
-| Database connectivity | Not tested |
-
-No automated testing framework is included in the described implementation. JUnit can be introduced to test the conversion logic and database operations automatically.
 
 ## 5. Setup and Execution Instructions
 
@@ -305,7 +208,7 @@ The credentials above are intended for local development only. Do not commit sen
 If Maven is configured in the project, run the following commands from the repository root:
 
 ```bash
-mvn clean compile
+mvn clean 
 ```
 
 This command compiles the project and checks for compilation errors.
