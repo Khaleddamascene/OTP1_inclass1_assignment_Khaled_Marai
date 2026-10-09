@@ -1,6 +1,6 @@
 # Temperature Converter
 
-## 1. Project Overview and Objectives
+##  Project Overview and Objectives
 
 Temperature Converter is a Java desktop application for converting temperatures between Celsius, Fahrenheit, and Kelvin. It provides a JavaFX graphical user interface and uses a MariaDB relational database to store conversion records.
 
@@ -16,24 +16,30 @@ The main objectives are to:
 - Initialize database tables and insert default temperature units.
 - Handle invalid input and database errors appropriately.
 
-## 2. Technology Stack and Dependencies
+## Technology Stack and Dependencies
 
 | Area | Technology |
 |---|---|
 | Programming language | Java |
+| Build tool | Maven|
 | Runtime | JDK 17 or later |
 | User interface | JavaFX |
 | Database | MariaDB |
 | Database connectivity | JDBC |
 | Database driver | MariaDB Connector/J |
 | Query language | SQL |
-| Build tool | Maven, if configured in the project |
-| Development environment | IntelliJ IDEA or another Java IDE |
+| Containerization | Docker |
+| Continuous integration | Jenkins |
+| Code coverage  | JaCoCo |
+| Unit testing framework | JUnit Jupiter |
+| Build and dependency management| Maven |
+| Development environment | IntelliJ IDEA |
 | Version control | Git and GitHub |
+
 
 The application uses JDBC to communicate with MariaDB. Prepared statements are used for database operations involving supplied values, and try-with-resources statements help ensure that database resources are closed correctly.
 
-## 3. Design and Development Methodology
+## Design and Development Methodology
 
 ### Architecture
 
@@ -72,6 +78,7 @@ TempRecordDAO
  └── TempRecord
 ```
 
+
 The relational database contains two tables.
 
 **temperature_units**
@@ -105,38 +112,7 @@ The `temperature_units` table stores Celsius, Fahrenheit, and Kelvin. The `tempe
 
 The database initialization process creates the tables if they do not exist and inserts the default temperature units using `INSERT IGNORE`.
 
-### Development Methodology
 
-Development is organized around separate application components:
-
-1. Implement the conversion formulas.
-2. Create the model classes.
-3. Implement database connection and initialization.
-4. Implement the DAO classes.
-5. Build the JavaFX interface.
-6. Connect the interface to the conversion and database layers.
-7. Perform manual tests for conversion accuracy, database functionality, and error handling.
-
-
-## 5. Setup and Execution Instructions
-
-### Prerequisites
-
-Install and configure the following:
-
-- JDK 17 or later.
-- JavaFX SDK or correctly configured JavaFX dependencies.
-- MariaDB server.
-- MariaDB JDBC driver.
-- IntelliJ IDEA or another Java IDE.
-- Maven, if the project is configured to use it.
-
-Verify the Java and Maven installations:
-
-```bash
-java -version
-mvn -version
-```
 
 ### Configure MariaDB
 
@@ -203,12 +179,48 @@ If the environment variables are not set, the provided Java implementation uses 
 
 The credentials above are intended for local development only. Do not commit sensitive database credentials to GitHub.
 
-### Build and Compile
 
-If Maven is configured in the project, run the following commands from the repository root:
+
+## Automated Testing
+
+Install and configure the following:
+
+- Mockito: supports mocking dependencies.
+- JavaFX SDK or correctly configured JavaFX dependencies.
+- H2 Database: provides an alternative database for tests.
+- JUnit Jupiter: supports unit tests.
+- JaCoCo: collects code coverage data and generates reports.
+- Maven Surefire Plugin: executes tests during the Maven test phase
+
+To execute the available automated tests, run:
+```bash
+mvn test
+```
+
+To generate the configured JaCoCo report, run:
 
 ```bash
-mvn clean 
+mvn verify
+```
+The coverage report is normally generated at:
+
+target/site/jacoco/index.html
+
+
+
+### Build and Compile
+
+Compile the application:
+
+```bash
+mvn clean package
+```
+
+
+Run tests only
+
+```bash
+mvn test
 ```
 
 This command compiles the project and checks for compilation errors.
@@ -221,7 +233,19 @@ If the project contains the appropriate Maven JavaFX plugin configuration, run:
 mvn javafx:run
 ```
 
-Alternatively, configure the JDK, JavaFX libraries, and MariaDB JDBC driver in your IDE, then run the main application class, such as `org.example.Main` or `org.example.App`, depending on the project structure.
+### Run with Docker
+
+Build the Docker image from the project root:
+
+```bash
+docker build -t temperature-converter .
+```
+
+Run the image:
+```bash
+docker run --rm temperature-converter
+```
+
 
 ### Using the Application
 
@@ -234,17 +258,8 @@ Alternatively, configure the JDK, JavaFX libraries, and MariaDB JDBC driver in y
 7. Click **Check Extreme Temperature** to classify the temperature.
 8. Click **Test Database** to check connectivity.
 
-## 6. Known Limitations
 
-- Automated unit tests are not included in the described implementation.
-- `TemperatureConverterView` is empty; the actual GUI is implemented in `App`.
-- The DAO can retrieve saved conversion records, but the current GUI does not display conversion history.
-- Numeric input validation may not reject `NaN`, infinity, or physically invalid negative Kelvin values.
-- The Java database defaults may not match the credentials created by the SQL initialization script.
-- The application requires a running MariaDB server and correctly initialized tables for database operations.
-- Maven execution depends on the project having the necessary JavaFX plugin and dependency configuration.
-
-## 7. Future Improvements
+##  Future Improvements
 
 Possible improvements include:
 
@@ -256,7 +271,7 @@ Possible improvements include:
 - Using a secure external configuration for database credentials.
 - Adding automated build and deployment workflows with Jenkins and Docker.
 
-## 8. Conclusion
+##  Conclusion
 
 Temperature Converter demonstrates Java programming, JavaFX interface development, temperature conversion formulas, object-oriented design, JDBC connectivity, MariaDB database operations, and exception handling.
 
@@ -264,6 +279,3 @@ The application is designed to convert temperatures between Celsius, Fahrenheit,
 
 Further development can improve input validation, automated testing, conversion history, and deployment automation.
 
-## 9. GitHub Repository
-
-[OTP1_inclass1_assignment_Khaled_Marai](https://github.com/Khaleddamascene/OTP1_inclass1_assignment_Khaleddamascene)
